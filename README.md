@@ -1,4 +1,5 @@
-# ほけきよのかんがえたさいきょうのブログ最適化補助ツール
+# ブログ最適化補助ツール
+退屈なことはpythonにやらせよう(ブログver.)
 
 ## Function
 1. 記事とURLの一覧表をcsvにする : リライトのチェック用に
@@ -10,6 +11,7 @@
 ## Requirement
 ### python
 - python3.x (2系ではurllib, エンコードの関係で動かないです)
+- はてなブログ
 ### libraries
 
 |ライブラリ|用途|
@@ -43,6 +45,7 @@ python all_in_one.py -u http://procrasist.com -d procrasist -n -i -b -l
 ```
 
 それぞれの引数の説明は、`python all_in_one.py -h`と入力すると出てきます。
+
 |引数|意味|
 |---|---|
 |-u, --url |input your url|
@@ -57,6 +60,9 @@ python all_in_one.py -u http://procrasist.com -d procrasist -n -i -b -l
 
 ### 出力
 下記の様な出力になっている
+
+※-d procrasist とした場合です。
+
 ```
 ├─taikutsu_blog_works
     ├─all_in_one.py
@@ -68,10 +74,17 @@ python all_in_one.py -u http://procrasist.com -d procrasist -n -i -b -l
         └─imgs
 ```
 
+- articles.csv : 記事一覧とURL
+- invalid_url_list.csv : リンク切れしている可能性があるURLリスト
+- graph : 内部リンクネットワーク構造の画像と、グラフファイル
+- hatebu : 各記事のはてブ初動画像
+- imgs : 拾ってきた画像
+
 ### 注意点
 - HTTPエラーForbiddenはUser Agentを使えばなんとかなるらしいけど非推奨とかかれていたので省く
     - コンソールにだけだして出力はしない
 - amazonリンクはcertificateがいるので省く
 - 楽天リンクはAPIの仕様(?)上かなりアクセスに時間がかかる
 - はてブ初動解析は、非公開の人のはてブは反映されていないので、実際よりも少ない
-- 
+- 特にURLのぶっこ抜きに関しては、はてなブログ用にハードコーディングしている
+    - はてなブログじゃない人は、連絡ください。余裕があれば対応します。
