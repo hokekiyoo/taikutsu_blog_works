@@ -6,6 +6,7 @@ import os
 import csv
 import json
 import datetime
+import time
 import matplotlib.pyplot as plt
 
 def extract_urls(args):
@@ -271,8 +272,7 @@ def main():
                 continue
             if args.image:
                 if "%" in name:
-                    #日本語対応
-                    name = str(i)
+                    name = str(i) #日本語対応
                 articles_to_img(args, url, soup, name)
             if args.graph:
                 make_network(G, args, url, urls, soup)
@@ -280,9 +280,9 @@ def main():
                 check_invalid_link(args, urls, url, soup, writer_invalid)
             if args.hatebu:
                 if "%" in name:
-                    #日本語対応
-                    name = str(i)
+                    name = str(i) #日本語対応
                 get_timestamps(args, url, name)
+            time.sleep(3)
         if args.invalid_url:
             f.close()
         if args.graph:
