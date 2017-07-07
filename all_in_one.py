@@ -167,7 +167,7 @@ def get_timestamps(args, url, name):
     data = request.urlopen("http://b.hatena.ne.jp/entry/json/{}".format(url)).read().decode("utf-8")
     info = json.loads(data.strip('(').rstrip(')'), "r")
     timestamps = list()
-    if info != None: # 公開ブックマークが存在する時に、それらの情報を抽出
+    if info != None and "bookmarks" in info.keys(): # 公開ブックマークが存在する時に、それらの情報を抽出
         bookmarks=info["bookmarks"]
         title = info["title"]
         for bookmark in bookmarks:
