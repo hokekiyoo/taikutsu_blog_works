@@ -1,5 +1,7 @@
 #coding:utf-8
+from argparse import ArgumentParser
 from urllib import request 
+import urllib
 from bs4 import BeautifulSoup
 import json
 import datetime
@@ -53,10 +55,10 @@ def rank_checker(url,hatebu_url):
 # はてなブログのトップページに乗っているか
 def is_hatenatop(url):
     try:
-        html = urllib2.urlopen("http://hatenablog.com/")
-    except urllib2.HTTPError as e:
+        html = request.urlopen("http://hatenablog.com/")
+    except urllib.HTTPError as e:
         print(e.reason)
-    except urllib2.URLError as e:
+    except urllib.URLError as e:
         print(e.reason)
     soup = BeautifulSoup(html,"lxml")
     a = soup.find("a",href=url)
@@ -99,10 +101,12 @@ def visualize(info, timestamp, data, label="", dayrange=2,annotate=True):
         plt.annotate(data,xy=(timestamp[-1], number[-1]), arrowprops=dict(arrowstyle='->'), xytext=(timestamp[-1],5))
 
 if __name__ == '__main__':
-    url = "http://www.procrasist.com/entry/link-network"
+    parser = ArgumentParser()
+    parser.add_argument("-u", "--url", type=str, required=True,help="input your url")
+    args = parser.parse_args()
     # plt.figure(figsize=(10,7))
-    entry_info = getdata(url)
-    hatebu_info, timestamps = get_timestamps(url)
-    visualize(hatebu_info, timestamps, entry_info, label="Udemy")
+    entry_info = getdata(args.url)
+    hatebu_info, timestamps = get_timestamps(args.url)
+    visualize(hatebu_info, timestamps, entry_info, label="optimization")
     plt.legend()
     plt.show()
