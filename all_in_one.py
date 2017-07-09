@@ -124,7 +124,9 @@ def url_checker(url, urls):
     flag2 = "d.hatena.ne.jp/keyword/" not in url    
     #amazonリンクはダメ
     flag3 = "http://www.amazon.co.jp" not in url and "http://amzn.to/" not in url
-    return flag1 and flag2 and flag3
+    #rakutenリンクはダメ
+    flag4 = "hb.afl.rakuten.co.jp" not in url
+    return flag1 and flag2 and flag3 and flag4
 
 
 def check_invalid_link(args, urls, url, soup, writer):
