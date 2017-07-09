@@ -62,8 +62,6 @@ def articles_to_img(args, url, soup, name):
     entry = soup.select(".entry-content")[0]
     imgs = entry.find_all("img")
     count=0
-    
-    
     for img in imgs:
         filename = img.get("src")
         if "ssl-images-amazon" in filename:
@@ -126,7 +124,9 @@ def url_checker(url, urls):
     flag3 = "http://www.amazon.co.jp" not in url and "http://amzn.to/" not in url
     #rakutenリンクはダメ
     flag4 = "hb.afl.rakuten.co.jp" not in url
-    return flag1 and flag2 and flag3 and flag4
+    #もしももダメ
+    flag5 = "af.moshimo" not in url
+    return flag1 and flag2 and flag3 and flag4 and flag5
 
 
 def check_invalid_link(args, urls, url, soup, writer):
@@ -203,7 +203,7 @@ def graph_visualize(G, args):
     pos = nx.spring_layout(G)
     # グラフ描画。 オプションでノードのラベル付きにしている
     plt.figure()
-    nx.draw(G, pos, with_labels=False, alpha=0.4,font_size=0.0,node_size=10) 
+    nx.draw_networkx(G, pos, with_labels=False, alpha=0.4,font_size=0.0,node_size=10) 
     plt.savefig(args.directory+"/graph/graph.png")
     nx.write_gml(G, args.directory+"/graph/graph.gml")
     # 次数分布描画
