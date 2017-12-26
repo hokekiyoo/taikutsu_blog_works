@@ -35,13 +35,13 @@ WindowsでのAnaconda環境構築はコチラ
 基本的には`all_in_one.py`で上記機能を網羅しています。全部使いたいときは、下記のように入力してください。
 
 ```
-python all_in_one.py --url http://procrasist.com --directory procrasist --network --image --hatebu --invalid_link
+python all_in_one.py --url http://procrasist.com --directory procrasist --graph --image --hatebu --invalid_link
 ```
 
 または
 
 ```
-python all_in_one.py -u http://procrasist.com -d procrasist -n -i -b -l
+python all_in_one.py -u http://procrasist.com -d procrasist -g -i -b -l
 ```
 
 それぞれの引数の説明は、`python all_in_one.py -h`と入力すると出てきます。
